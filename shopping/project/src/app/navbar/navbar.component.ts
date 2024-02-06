@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ProductsService } from '../products/products.service';
 import { AuthService } from '../auth.service';
+import { loginService } from '../login/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +14,8 @@ import { AuthService } from '../auth.service';
 })
 export class NavbarComponent {
 public  productssservice=inject(ProductsService)
+public  loginservice=inject(loginService)  
+
   authService=inject(AuthService)
   serch:string=''
   searchList:any[]=[]
@@ -24,6 +27,10 @@ public  productssservice=inject(ProductsService)
 }
 onlogout(){
   this.authService.clearTokenLocalStorage()
+}
+onlogoutadmin(){
+this.loginservice.Usertype=false
+
 }
 }
 

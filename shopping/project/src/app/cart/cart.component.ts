@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ProductsService } from '../products/products.service';
 import { CommonModule } from '@angular/common';
-
+import { jwtDecode } from "jwt-decode";
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -10,7 +11,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-Productsservice=inject(ProductsService)
+  authService=inject(AuthService)
+  Productsservice=inject(ProductsService)
+  token:any=''
+  decoded:any=''
 public  products:any[]=[]
 ngOnInit(): void {
   for (let i = 0; i < this.Productsservice.Selected.length; i++) {
@@ -20,11 +24,15 @@ ngOnInit(): void {
      }
     }
   } 
-  console.log(this.products);
+
   
 }
 
-apply(){
-
+onApply(){
+  console.log(this.products);
+   this.token = this.authService.token;
+   this.decoded = jwtDecode(this.token);
+   console.log(this.decoded);
+   
 }
 }

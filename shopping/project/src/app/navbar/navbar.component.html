@@ -13,9 +13,12 @@
             <a routerLink="./cart"><img class="image" src="../../assets/image/cart.png" alt="saasadewf"></a>
         </div>
             <div class="navbar-nav">
-                <a *ngIf="authService.localstrongfull" routerLink="./login" routerLinkActive="router-link-active"  class="nav-item nav-link active">ورود</a>
+                <a *ngIf="authService.localstrongfull && !loginservice.Usertype"  routerLink="./login" routerLinkActive="router-link-active"  class="nav-item nav-link active">ورود</a>
+                <a *ngIf="loginservice.Usertype"  routerLink="./login" routerLinkActive="router-link-active"  class="nav-item nav-link active">سفارشات مشتریان</a>
+                <a *ngIf="loginservice.Usertype"  routerLink="./Createproduct" routerLinkActive="router-link-active"  class="nav-item nav-link active">افزودن محصول</a>
+                <a *ngIf="loginservice.Usertype"  (click)="onlogoutadmin()" routerLink="./login" routerLinkActive="router-link-active"  class="nav-item nav-link active">خروج</a>
                 <a *ngIf="!authService.localstrongfull" (click)="onlogout()" routerLink="./login" routerLinkActive="router-link-active"  class="nav-item nav-link active">خروج</a>
-                <a *ngIf="authService.localstrongfull" routerLink="./registration" class="nav-item nav-link">ثبت نام</a>
+                <a *ngIf="authService.localstrongfull && !loginservice.Usertype" routerLink="./registration" class="nav-item nav-link">ثبت نام</a>
                 <a routerLink="" class="nav-item nav-link">محصولات</a>
             </div>
             <div>

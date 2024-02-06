@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 })
 export class loginService{
     http=inject(HttpClient)
-    login(data:any) {
-        return this.http.post(`http://localhost:4000/api/checkdata`,data)
+    login(data:any,id:any) {
+        return this.http.post(`http://localhost:4000/api/checkdata/`,data)
     }
 }

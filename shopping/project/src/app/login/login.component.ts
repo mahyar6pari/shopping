@@ -17,9 +17,15 @@ export class LoginComponent {
   router=inject(Router)
   loginservice=inject(loginService)
   Authservice=inject(AuthService)
+  //loginpage user or admin
+  display=false
  form=this.fb.group({
   tel:['',Validators.required],
   password:['',Validators.required],
+ })
+ formadmin=this.fb.group({
+  adminname:['',Validators.required],
+  adminpassword:['',Validators.required],
  })
 
  onsubmit(){
@@ -36,6 +42,26 @@ export class LoginComponent {
       
     
     console.log(data);
+    
+  })
+ }
+ users(){
+  this.display=false
+ }
+ admin(){
+  this.display=true
+ }
+ onadminsubmit(){
+  console.log(this.formadmin.value);
+  this.loginservice.adminlogin(this.formadmin.value).subscribe((data)=>{
+    if (data=='Success') {
+      this.loginservice.Usertype=true
+      console.log( this.loginservice.Usertype);
+      
+    }
+    else if(data="notacount"){
+      this.loginservice.Usertype=false
+    }
     
   })
  }
